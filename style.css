@@ -3,3 +3,70 @@
   margin: 0px;
   box-sizing: border-box;
 }
+img {
+  width: 300px;
+  height: 400px;
+}
+
+h1{
+  color: aliceblue;
+  display: grid;
+  justify-content: center;
+}
+/* 
+p {
+  color: black;
+  font-family: Arial, Helvetica, sans-serif;
+} */
+
+iframe {
+  height: 400px;
+  aspect-ratio: 16 / 9;
+}
+
+body {
+background-color: rgb(104, 104, 104);
+}
+
+.navBar {
+  display: grid;
+  justify-content: center;
+  padding-bottom: 20px;
+  padding-top: 20px;
+  gap: 10px;
+  font-size: 18px;
+  background-color: black;
+}
+
+label {
+color: white;
+}
+
+.mContainer {
+  display: flex;
+  justify-content: center;
+  padding-bottom: 50px;
+  padding-top: 50px;
+}
+
+.pContainer {
+padding-left: 10px;
+}
+
+button {
+  height: 22px;
+  width: 100px;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  border-color: white;
+  border-width: 1px;
+}
+
+select {
+  background-color: black;
+  height: 22px;
+  color: white;
+  border-color: white;
+  border-width: 1px;
+}
