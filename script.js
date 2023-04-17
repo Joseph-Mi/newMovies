@@ -1,10 +1,5 @@
-// const selectMovie = document.getElementById("movieOptions");
-// const getMovie = document.getElementById("getMovieData");
-// const mContainer =
-
-
 const movieSelect = document.getElementById("movieOptions");
-const button = document.getElementById("getMovie");
+const getMovie = document.getElementById("getMovie");
 const mCont = document.getElementById("mContainer");
 const pCont = document.getElementById("pContainer");
 let movieID = null;
@@ -15,8 +10,8 @@ movieSelect.addEventListener('click', () => {
   }
 })
 
-button.addEventListener('click', () => {
-  if(button.click){
+getMovie.addEventListener('click', () => {
+  if(getMovie.click){
     clearData();
     getmovie(movieID);
   }
@@ -31,7 +26,7 @@ function clearData(){
   }
 }
 
-function getmovie(id){
+function movieData(id){
   axios.get(`https:api.themoviedb.org/3/movie/${id}`, {
         params:{
         api_key: "fbb6ba03bbd1aaeb92c52f989ea8698d",
@@ -41,11 +36,12 @@ function getmovie(id){
     ).then((movieData) => {
           const img = document.createElement('img');
           const p = document.createElement('p');
-          const iframe = document.createElement('iframe');
+          const getTrailer = document.createElement('trailer');
+          // const iframe = document.createElement('iframe');
   
-          const trailers = movieData.data.videos.results.filter((trailer) => trailer.type == "Trailer");
+          // const trailers = movieData.data.videos.results.filter((trailer) => trailer.type == "Trailer");
 
-          iframe.src = `https://www.youtube.com/embed/${trailers.at(0).key}`
+          // iframe.src = `https://www.youtube.com/embed/${trailers.at(0).key}`
           img.src = `https://image.tmdb.org/t/p/w500${movieData.data.poster_path}`;
 
           p.innerHTML = `Movie title: ${movieData.data.title} <br>
@@ -56,10 +52,19 @@ function getmovie(id){
           Runtime: ${movieData.data.runtime} mins<br>
           Average rating: ${movieData.data.vote_average}/10<br>
           Revenue: $${movieData.data.revenue}<br>`;
+
+          getTrailer.innerHTML = "Get Trailer";
         
           
           mContainer.append(img);
-          mContainer.append(iframe);
+          // mContainer.append(iframe);
           pContainer.append(p); 
+          pContainer.append(getTrailer);
   });
 }
+
+getTrailer.addEventListener('click', () => {
+  if(button.click){
+    
+  }
+})
