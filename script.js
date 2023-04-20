@@ -1,70 +1,107 @@
-const movieSelect = document.getElementById("movieOptions");
-const getMovie = document.getElementById("getMovie");
-const mCont = document.getElementById("mContainer");
-const pCont = document.getElementById("pContainer");
-let movieID = null;
+import { TMDB_API_KEY } from "./key.js";
 
-movieSelect.addEventListener('click', () => {
-  if(button.click){
-    movieID = movieSelect.value;
-  }
-})
+const getTMDBData = async (url) => {
+  return (await axios.get(url)).data;
+};
 
-getMovie.addEventListener('click', () => {
-  if(getMovie.click){
-    clearData();
-    getmovie(movieID);
-  }
-})
+const createMovieTile = (
+  trailers,
+  poster,
+  title,
+  date,
+  description,
+  revenue,
+  time,
+  vote,
+  count,
+  lang,
+  popularity
+) => {
 
-function clearData(){
-  while (mCont.firstChild) {
-    mCont.removeChild(mCont.firstChild);
-  }
-  while (pCont.firstChild){
-    pCont.removeChild(pCont.firstChild);
-  }
-}
+  const tile = document.createElement("div");
+  const details = document.createElement("div");
+  const img = document.createElement("img");
+  const h1 = document.createElement("h1");
+  const h3 = document.createElement("h3");
+  const h4 = document.createElement("h4");
+  const h5 = document.createElement("h4");
+  const h6 = document.createElement("h4");
+  const h7 = document.createElement("h4");
+  const h8 = document.createElement("h4");
+  const h9 = document.createElement("h4");
+  const h10 = document.createElement("h4");
 
-function movieData(id){
-  axios.get(`https:api.themoviedb.org/3/movie/${id}`, {
-        params:{
-        api_key: "fbb6ba03bbd1aaeb92c52f989ea8698d",
-        append_to_response: "videos",
-        }
-      }
-    ).then((movieData) => {
-          const img = document.createElement('img');
-          const p = document.createElement('p');
-          const getTrailer = document.createElement('trailer');
-          // const iframe = document.createElement('iframe');
+  tile.classList.add("tile");
+  img.src = `https://image.tmdb.org/t/p/w500/${poster}`;
+  const trailer = trailers.filter((trailer) => trailer.type === "Trailer");
+  h1.innerText = title;
+  h3.innerText = `Release Date: ${date}`;
+  h4.innerText = `Overview: ${description}`;
+  h5.innerText = `Revenue: $${revenue}`;
+  h6.innerText = `Runtime: ${time} mins`;
+  h7.innerText = `Vote Average: ${vote}/10`;
+  h8.innerText = `Number of Votes: ${count}`;
+  h9.innerText = `Language: ${lang}`;
+  h10.innerText = `Popularity Rating: ${popularity}`;
+
+  details.append(h1);
+  details.append(h3);
+  details.append(h4);
+  details.append(h5);
+  details.append(h6);
+  details.append(h7);
+  details.append(h8);
+  details.append(h9);
+  details.append(h10);
+
+  tile.append(img);
+  tile.append(details);
   
-          // const trailers = movieData.data.videos.results.filter((trailer) => trailer.type == "Trailer");
+  if (trailer.length) {
+    const iframe = document.createElement("iframe");
+    iframe.src = `https://www.youtube.com/embed/${trailer.at(0).key}`;
+    tile.append(iframe);
+  } else {
+    const p = document.createElement("p");
+    p.innerText = "No trailer available!";
+    tile.append(p);
+  }
 
-          // iframe.src = `https://www.youtube.com/embed/${trailers.at(0).key}`
-          img.src = `https://image.tmdb.org/t/p/w500${movieData.data.poster_path}`;
+  return tile;
+};
 
-          p.innerHTML = `Movie title: ${movieData.data.title} <br>
-          Overview: ${movieData.data.overview}<br>
-          Release date: ${movieData.data.release_date} <br>
-          Popularity ranking: ${movieData.data.popularity}<br>
-          Budget: $${movieData.data.budget}<br>
-          Runtime: ${movieData.data.runtime} mins<br>
-          Average rating: ${movieData.data.vote_average}/10<br>
-          Revenue: $${movieData.data.revenue}<br>`;
-
-          getTrailer.innerHTML = "Get Trailer";
-        
-          
-          mContainer.append(img);
-          // mContainer.append(iframe);
-          pContainer.append(p); 
-          pContainer.append(getTrailer);
-  });
+function clearDiv(id) {
+  let checkEmpty = document.getElementById(id).innerHTML === "";
+  if (checkEmpty) {
+    return;
+  } else {
+    document.getElementById(id).innerHTML = "";
+  }
 }
 
-getTrailer.addEventListener('click', () => {
-  if(button.click){
-    
-  }
-})
+async function getData(id) {
+  let movie = await getTMDBData(
+    `https://api.themoviedb.org/3/movie/${id}?api_key=${TMDB_API_KEY}&language=en-US&adult=false&append_to_response=videos`
+  );
+  const tile = createMovieTile(
+    movie.videos.results,
+    movie.poster_path,
+    movie.title,
+    movie.release_date,
+    movie.overview,
+    movie.revenue,
+    movie.runtime,
+    movie.vote_average,
+    movie.vote_count,
+    movie.original_language,
+    movie.popularity
+  );
+  let movies = document.getElementById("movies");
+  movies.appendChild(tile);
+}
+
+document.getElementById("getMovie").addEventListener("click", () => {
+  clearDiv("movies");
+  let movieID = document.getElementById("movieOptions").value;
+  getData(movieID);
+});

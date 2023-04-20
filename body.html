@@ -1,43 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
-
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-    <script src="./script.js" defer></script>
-    <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <!-- <script src="https://unpkg.com/axios@1.1.2/dist/axios.min.js"></script> -->
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <title>The Best Movie Finder</title>
 
-  <body>  
-      <div class="navBar">
-        <h1>Movie Mania</h1>
-        <label for="movieOptions">Find Movie:</label>
-        <select id="movieOptions">
-          <option value="">Search Movie</option>
-          <option value="1033219">Attack on Titans</option>
-          <option value="804150">Cocain Bear</option>
-          <option value="980078">Winnie the Pooh: Blood and Honey</option>
-          <option value="389">12 Angry Men</option>
-          <option value="13">Forrest Gump</option>
-          <option value="505642">Black Panther: Wakanda Forever</option>
-          <option value="943822">Prizefighter: The Life of Jem Belcher</option>
-          <option value="296271">The Devil Conspiracy</option>
-          <option value="502356">The Super Mario Bros. Movie</option>
-          <option value="76600">Avatar: The Way of Water</option>
-        </select>
-          <button id="getMovie">GET</button>
-      </div>
-
-      <div class="mContainer" id ="mContainer"></div>
-      <div class="pContainer" id="pContainer"></div>
-    
+  <body>
+    <script type="module" src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@1.1.2/dist/axios.min.js"></script>
+    <div class="navBar">
+      <h1>Movie Mania</h1>
+      <label for="movieOptions">Find Movie:</label>
+      <select id="movieOptions">
+        <option value="">Search Movie</option>
+        <option value="1033219">Attack on Titans</option>
+        <option value="804150">Cocaine Bear</option>
+        <option value="980078">Winnie the Pooh: Blood and Honey</option>
+        <option value="389">12 Angry Men</option>
+        <option value="13">Forrest Gump</option>
+        <option value="505642">Black Panther: Wakanda Forever</option>
+        <option value="315162">Puss in Boots: The Last Wish</option>
+        <option value="296271">The Devil Conspiracy</option>
+        <option value="502356">The Super Mario Bros. Movie</option>
+        <option value="76600">Avatar: The Way of Water</option>
+      </select>
+      <button id="getMovie">GET</button>
+    </div>
+    <div id="movies"></div>
   </body>
-
 </html>
-
-<!-- P./BBkG)VatRV9Y -->

@@ -13,11 +13,6 @@ h1{
   display: grid;
   justify-content: center;
 }
-/* 
-p {
-  color: black;
-  font-family: Arial, Helvetica, sans-serif;
-} */
 
 iframe {
   height: 400px;
@@ -42,16 +37,13 @@ label {
 color: white;
 }
 
-.mContainer {
+#movies {
   display: flex;
   justify-content: center;
   padding-bottom: 50px;
   padding-top: 50px;
-}
-
-.pContainer {
-padding-left: 17vw;
-padding-right: 17vw;
+  padding-left: 17vw;
+  padding-right: 17vw;
 }
 
 button {
