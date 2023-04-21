@@ -33,8 +33,11 @@ const createMovieTile = (
 
   tile.classList.add("tile");
   img.src = `https://image.tmdb.org/t/p/w500/${poster}`;
+  img.style.alignItems = "left";
+  img.style.width = "300px";
+  img.style.height = "400px";
   const trailer = trailers.filter((trailer) => trailer.type === "Trailer");
-  h1.innerText = title;
+  h1.innerText = `/n ${title};
   h3.innerText = `Release Date: ${date}`;
   h4.innerText = `Overview: ${description}`;
   h5.innerText = `Revenue: $${revenue}`;
@@ -55,17 +58,20 @@ const createMovieTile = (
   details.append(h10);
 
   tile.append(img);
-  tile.append(details);
   
   if (trailer.length) {
     const iframe = document.createElement("iframe");
     iframe.src = `https://www.youtube.com/embed/${trailer.at(0).key}`;
+    iframe.style.marginLeft = "2vw";
     tile.append(iframe);
   } else {
     const p = document.createElement("p");
     p.innerText = "No trailer available!";
     tile.append(p);
   }
+
+
+  tile.append(details);
 
   return tile;
 };
